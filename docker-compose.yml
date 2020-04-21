@@ -1,0 +1,10 @@
+version: '3'
+services:
+  util_day-app:
+    build: .
+    command: yarn dev
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3333:3333"
