@@ -1,4 +1,5 @@
 import { formatISO } from 'date-fns';
+import helper from '../helpers';
 
 class Brazil {
   constructor(year) {
@@ -36,13 +37,20 @@ class Brazil {
   }
 
   populate(year) {
+    this.addHoliday(`${year}-04-21`, 'Tiradentes');
+    this.addHoliday(`${year}-05-01`, 'Trabalhador');
+    this.addHoliday(helper.getEaster(year), 'Pascoa');
+  }
+
+  addHoliday(dateString, description) {
+    if (this.holidays.has(dateString)) {
+      const oldDescription = this.holidays.get(dateString);
+      description = `${oldDescription}; ${description}`;
+    }
+
     this.holidays.set(
-      formatISO(new Date(`${year}-04-21`), { representation: 'date' }),
-      'tiradentes'
-    );
-    this.holidays.set(
-      formatISO(new Date(`${year}-05-01`), { representation: 'date' }),
-      'trabalhador'
+      formatISO(new Date(dateString), { representation: 'date' }),
+      description
     );
   }
 
