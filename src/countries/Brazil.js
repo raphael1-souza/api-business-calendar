@@ -1,7 +1,7 @@
 import { formatISO } from 'date-fns';
 
 class Brazil {
-  constructor() {
+  constructor(year) {
     this.holidays = new Map();
     this.STATES = [
       'AC',
@@ -32,16 +32,16 @@ class Brazil {
       'SE',
       'TO',
     ];
-    this.populate();
+    this.populate(year);
   }
 
-  populate() {
+  populate(year) {
     this.holidays.set(
-      formatISO(new Date('2020-04-21'), { representation: 'date' }),
+      formatISO(new Date(`${year}-04-21`), { representation: 'date' }),
       'tiradentes'
     );
     this.holidays.set(
-      formatISO(new Date('2020-05-01'), { representation: 'date' }),
+      formatISO(new Date(`${year}-05-01`), { representation: 'date' }),
       'trabalhador'
     );
   }

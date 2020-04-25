@@ -4,8 +4,9 @@ import Brazil from '../countries/Brazil';
 class BusinessCalendarController {
   isBusinessDay(dateObject) {
     const dateString = formatISO(dateObject, { representation: 'date' });
-    const date = dateString;
-    const brazil = new Brazil();
+    const typeDate = new Date(dateString);
+    const year = typeDate.getFullYear();
+    const brazil = new Brazil(year);
     const { holidays } = brazil.getHolidays();
     let holiday = false;
     let description = 'business day';
@@ -16,14 +17,14 @@ class BusinessCalendarController {
       description = holidays.get(dateString);
 
       return {
-        date,
+        dateString,
         description,
         holiday,
       };
     }
     // Dia útil
     return {
-      date,
+      dateString,
       description,
       holiday,
     };
