@@ -1,30 +1,33 @@
 import { formatISO, parseISO, isValid } from 'date-fns';
-import Brazil from '../countries/Brazil';
+import UnitedStates from '../countries/UnitedStates';
 
 class BusinessCalendarController {
   isBusinessDay(dateObject) {
-    const dateString = formatISO(dateObject, { representation: 'date' });
-    const typeDate = new Date(dateString);
+    const date = formatISO(dateObject, { representation: 'date' });
+    const typeDate = new Date(date);
     const year = typeDate.getFullYear();
-    const brazil = new Brazil(year);
-    const { holidays } = brazil.getHolidays();
+    const usa = new UnitedStates(year);
+    const { holidays } = usa.getHolidays();
     let holiday = false;
-    let description = 'business day';
+    let description = 'Business day';
+    if (typeDate.getDay() === 0 || typeDate.getDay() === 6) {
+      description = 'Weekend';
+    }
 
     // Feriado
-    if (holidays.has(dateString)) {
+    if (holidays.has(date)) {
       holiday = true;
-      description = holidays.get(dateString);
+      description = holidays.get(date);
 
       return {
-        dateString,
+        date,
         description,
         holiday,
       };
     }
     // Dia útil
     return {
-      dateString,
+      date,
       description,
       holiday,
     };
