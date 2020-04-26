@@ -37,8 +37,8 @@ class Brazil extends Country {
   }
 
   populate(year) {
-    super.addHoliday(`${year}-04-21`, 'Tiradentes');
-    super.addHoliday(`${year}-05-01`, 'Trabalhador');
+    super.addHoliday(new Date(`${year}-04-21`), 'Tiradentes');
+    super.addHoliday(new Date(`${year}-05-01`), 'Trabalhador');
     super.addHoliday(helper.getEaster(year), 'Pascoa');
   }
 

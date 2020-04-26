@@ -1,7 +1,7 @@
 import { formatISO, parseISO, isValid } from 'date-fns';
 import UnitedStates from '../countries/UnitedStates';
 
-class BusinessCalendarController {
+class BusinessCalendarService {
   isBusinessDay(dateObject) {
     const date = formatISO(dateObject, { representation: 'date' });
     const typeDate = new Date(date);
@@ -51,4 +51,4 @@ class BusinessCalendarController {
   }
 }
 
-export default new BusinessCalendarController();
+export default new BusinessCalendarService();
