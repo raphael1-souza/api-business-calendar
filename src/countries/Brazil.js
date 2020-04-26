@@ -1,9 +1,9 @@
-import { formatISO } from 'date-fns';
 import helper from '../helpers';
+import Country from './Country';
 
-class Brazil {
+class Brazil extends Country {
   constructor(year) {
-    this.holidays = new Map();
+    super();
     this.STATES = [
       'AC',
       'AL',
@@ -37,35 +37,15 @@ class Brazil {
   }
 
   populate(year) {
-    this.addHoliday(`${year}-04-21`, 'Tiradentes');
-    this.addHoliday(`${year}-05-01`, 'Trabalhador');
-    this.addHoliday(helper.getEaster(year), 'Pascoa');
-  }
-
-  addHoliday(dateString, description) {
-    if (this.holidays.has(dateString)) {
-      const oldDescription = this.holidays.get(dateString);
-      description = `${oldDescription}; ${description}`;
-    }
-
-    this.holidays.set(
-      formatISO(new Date(dateString), { representation: 'date' }),
-      description
-    );
+    super.addHoliday(`${year}-04-21`, 'Tiradentes');
+    super.addHoliday(`${year}-05-01`, 'Trabalhador');
+    super.addHoliday(helper.getEaster(year), 'Pascoa');
   }
 
   getStates() {
     return {
       first: this.STATES[0],
       size: this.STATES.length,
-    };
-  }
-
-  getHolidays() {
-    return {
-      type: typeof this.holidays,
-      size: this.holidays.size,
-      holidays: this.holidays,
     };
   }
 }
