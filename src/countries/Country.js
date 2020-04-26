@@ -5,16 +5,15 @@ class Country {
     this.holidays = new Map();
   }
 
-  addHoliday(dateString, description) {
+  addHoliday(date, description) {
+    const dateString = formatISO(date, { representation: 'date' });
+
     if (this.holidays.has(dateString)) {
       const oldDescription = this.holidays.get(dateString);
       description = `${oldDescription}; ${description}`;
     }
 
-    this.holidays.set(
-      formatISO(new Date(dateString), { representation: 'date' }),
-      description
-    );
+    this.holidays.set(dateString, description);
   }
 
   getHolidays() {
