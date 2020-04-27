@@ -17,11 +17,8 @@ function getEaster(year) {
   const J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7;
   // number of days from 21 March to the Sunday on or before the Paschal full moon
   const L = I - J;
-  let month = 3 + f((L + 40) / 44);
-  let day = L + 28 - 31 * f(month / 4);
-
-  if (day < 10) day = `0${day}`;
-  if (month < 10) month = `0${month}`;
+  const month = 3 + f((L + 40) / 44);
+  const day = L + 28 - 31 * f(month / 4);
 
   return new Date(`${year}-${month}-${day}`);
 }
@@ -32,7 +29,4 @@ function nthWeekday(dayOfWeek, n, date) {
   return date;
 }
 
-export default {
-  getEaster,
-  nthWeekday,
-};
+export { getEaster, nthWeekday };

@@ -1,5 +1,5 @@
 import { add } from 'date-fns';
-import helpers from '../helpers';
+import { nthWeekday } from '../helpers';
 import Country from './Country';
 
 class UnitedStates extends Country {
@@ -92,7 +92,7 @@ class UnitedStates extends Country {
     // Martin Luther King Day
     name = 'Martin Luther King Day';
     if (year >= 1986) {
-      date = helpers.nthWeekday(1, 3, new Date(`${year}-01-01`));
+      date = nthWeekday(1, 3, new Date(`${year}-01-01`));
       super.addHoliday(date, name);
       // console.log(date);
       // console.log(typeof date);
@@ -100,13 +100,13 @@ class UnitedStates extends Country {
 
     //  Washington's Birthday
     name = "Washington's Birthday";
-    date = helpers.nthWeekday(1, 3, new Date(`${year}-02-01`));
+    date = nthWeekday(1, 3, new Date(`${year}-02-01`));
     super.addHoliday(date, name);
 
     // Memorial Day
     name = 'Memorial Day';
     if (year > 1970) {
-      date = helpers.nthWeekday(1, 0, new Date(`${year}-05-31`));
+      date = nthWeekday(1, 0, new Date(`${year}-05-31`));
       super.addHoliday(date, name);
     } else if (year >= 1888) {
       super.addHoliday(new Date(`${year}-05-30`), name);
@@ -130,7 +130,7 @@ class UnitedStates extends Country {
     //  Labor Day
     if (year >= 1894) {
       name = 'Labor Day';
-      date = helpers.nthWeekday(1, 1, new Date(`${year}-09-01`));
+      date = nthWeekday(1, 1, new Date(`${year}-09-01`));
       super.addHoliday(date, name);
     }
 
@@ -138,7 +138,7 @@ class UnitedStates extends Country {
     name = 'Columbus Day';
 
     if (year >= 1970) {
-      date = helpers.nthWeekday(1, 2, new Date(`${year}-10-01`));
+      date = nthWeekday(1, 2, new Date(`${year}-10-01`));
       super.addHoliday(date, name);
     } else if (year >= 1937) {
       super.addHoliday(new Date(`${year}-10-12`), name);
@@ -149,7 +149,7 @@ class UnitedStates extends Country {
     else name = 'Armistice Day';
 
     if (year < 1978 > 1970) {
-      date = helpers.nthWeekday(1, 4, new Date(`${year}-10-01`));
+      date = nthWeekday(1, 4, new Date(`${year}-10-01`));
       super.addHoliday(date, name);
     } else if (year >= 1938) {
       date = new Date(`${year}-11-11`);
@@ -167,7 +167,7 @@ class UnitedStates extends Country {
     //  Thanksgiving
     if (year > 1870) {
       name = 'Thanksgiving';
-      date = helpers.nthWeekday(4, 4, new Date(`${year}-11-01`));
+      date = nthWeekday(4, 4, new Date(`${year}-11-01`));
       super.addHoliday(date, name);
     }
 
