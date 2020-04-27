@@ -1,7 +1,20 @@
 import { add } from 'date-fns';
 import { nthWeekday } from '../helpers';
 import Country from './Country';
-import { JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC } from '../constants';
+import {
+  JAN,
+  FEB,
+  MAR,
+  APR,
+  MAY,
+  JUN,
+  JUL,
+  AUG,
+  SEP,
+  OCT,
+  NOV,
+  DEC,
+} from '../constants';
 
 class UnitedStates extends Country {
   constructor(year) {
@@ -95,8 +108,6 @@ class UnitedStates extends Country {
     if (year >= 1986) {
       date = nthWeekday(1, 3, new Date(year, JAN, 1));
       super.addHoliday(date, name);
-      // console.log(date);
-      // console.log(typeof date);
     }
 
     //  Washington's Birthday
@@ -107,10 +118,15 @@ class UnitedStates extends Country {
     // Memorial Day
     name = 'Memorial Day';
     if (year > 1970) {
-      date = nthWeekday(1, 0, new Date(year, MAY, 31));
-      super.addHoliday(date, name);
+      date = new Date(year, MAY, 31);
+      if (date.getDay() === 1) {
+        super.addHoliday(date, name);
+      } else {
+        date = nthWeekday(1, 0, new Date(year, MAY, 31));
+        super.addHoliday(date, name);
+      }
     } else if (year >= 1888) {
-      super.addHoliday(new Date(year, MAY, 30), name);
+      super.addHoliday(new Date(`${year}-05-30`), name);
     }
 
     // Independence Day
