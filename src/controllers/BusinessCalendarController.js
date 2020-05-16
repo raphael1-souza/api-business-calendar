@@ -10,27 +10,40 @@ class BusinessCalendarController {
 
   isBusinessDay(req, res) {
     let { date, country, state } = req.params;
+
+    try {
+      if (!country) throw new Error('Please inform country');
+
+      country = BusinessCalendarService.indentifyCountry(country);
+      if (!country) throw new Error('Country couldnt be identified');
+    } catch (e) {
+      return res.json({
+        error: e.message,
+      });
+    }
+
     if (date) {
       date = parseISO(date);
       if (!isNaN(date)) {
         return res.json(BusinessCalendarService.isBusinessDay(date));
       }
     }
-    if (!country) {
-      return res.json({
-        error: 'Please inform country',
-      });
-    }
 
     return res.json(date);
   }
 
   listDays(req, res) {
-    let { dates } = req.params;
-    const { country } = req.params;
-    if (!country) {
+    const { dates } = req.params;
+    let { country } = req.params;
+
+    try {
+      if (!country) throw new Error('Please inform country');
+
+      country = BusinessCalendarService.indentifyCountry(country);
+      if (!country) throw new Error('Country couldnt be identified');
+    } catch (e) {
       return res.json({
-        error: 'Please inform country',
+        error: e.message,
       });
     }
     dates = dates.split(',');
