@@ -25,7 +25,7 @@ class BusinessCalendarController {
     if (date) {
       date = parseISO(date);
       if (!isNaN(date)) {
-        return res.json(BusinessCalendarService.isBusinessDay(date));
+        return res.json(BusinessCalendarService.isBusinessDay(date, country));
       }
     }
 
@@ -46,8 +46,8 @@ class BusinessCalendarController {
         error: e.message,
       });
     }
-    dates = dates.split(',');
-    const datesRes = BusinessCalendarService.listDays(dates);
+
+    const datesRes = BusinessCalendarService.listDays(dates, country);
 
     return res.json(datesRes);
   }
