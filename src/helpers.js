@@ -29,4 +29,22 @@ function nthWeekday(dayOfWeek, n, date) {
   return date;
 }
 
-export { getEaster, nthWeekday };
+function isBrazil(country) {
+  const compare = country.localeCompare('brazil');
+  let boolCompare = false;
+
+  if (compare === 0) boolCompare = true;
+
+  return boolCompare;
+}
+
+function isUnitedStates(country) {
+  const compare = country.localeCompare('usa');
+  let boolCompare = false;
+
+  if (compare === 0) boolCompare = true;
+
+  return boolCompare;
+}
+
+export { getEaster, nthWeekday, isBrazil, isUnitedStates };
