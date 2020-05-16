@@ -1,5 +1,7 @@
 import { formatISO, parseISO, isValid } from 'date-fns';
 import UnitedStates from '../countries/UnitedStates';
+import { isBrazil, isUnitedStates } from '../helpers';
+import Brazil from '../countries/Brazil';
 
 class BusinessCalendarService {
   isBusinessDay(dateObject) {
@@ -48,6 +50,18 @@ class BusinessCalendarService {
     });
 
     return datesResult;
+  }
+
+  indentifyCountry(country) {
+    if (isBrazil(country)) {
+      return Brazil;
+    }
+
+    if (isUnitedStates(country)) {
+      return UnitedStates;
+    }
+
+    return false;
   }
 }
 
