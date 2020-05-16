@@ -202,6 +202,8 @@ class UnitedStates extends Country {
         super.addHoliday(dateObserved, `${name} (Observed)`);
       }
     }
+
+    console.log(this.holidays);
   }
 
   getStates() {
