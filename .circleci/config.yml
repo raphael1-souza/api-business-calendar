@@ -12,7 +12,7 @@ jobs:
       - node/with-cache:
           steps:
             # - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            - run: make build
+            - run: make run-local
             - run: make test
 workflows:
     build-and-test:
