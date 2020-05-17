@@ -8,9 +8,10 @@ jobs:
       name: node/default
     steps:
       - checkout
+      - setup_remote_docker
       - node/with-cache:
           steps:
-            - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            # - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             - run: make build
             - run: make test
 workflows:
