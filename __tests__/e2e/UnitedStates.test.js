@@ -4,7 +4,7 @@ const chaiSubset = require('chai-subset');
 
 /* eslint-disable no-undef */
 use(chaiSubset);
-const baseUrl = 'http://localhost:3333';
+const baseUrl = `http://util_day-app:3333`;
 describe('Holidays in United States', () => {
   it('should be New Year', async () => {
     const response = await axios.get(

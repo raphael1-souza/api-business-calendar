@@ -8,8 +8,8 @@ jobs:
       - image: circleci/node:10.15.1-jessie-browsers
     steps:
         - checkout
-        - run:
-            command: curl -o- -L https://yarnpkg.com/install.sh | bash
+        # - run:
+        #     command: curl -o- -L https://yarnpkg.com/install.sh | bash
         - run:
             name: Install dependencies
             command: yarn
@@ -17,54 +17,40 @@ jobs:
             name: Run linter
             command: yarn run lint:pr -- $(git rev-list --simplify-by-decoration -1 HEAD^)
 
-  # build:
-  #   machine: true
-  #   working_directory: ~/api-business-calendar
-  #   executor:
-  #     name: node/default
-  #   steps:
-  #     - checkout
-  #     - setup_remote_docker
-  #     - node/with-cache:
-  #         steps:
-  #           - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  #           - run: make run-local
+  tests:
+    docker:
+      - image: circleci/node:10.15.1-jessie-browsers
+    working_directory: ~/usr/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/usr/app
+      - run:
+          name: Debug
+          command:
+            ls -la
+      - run:
+          name: Build
+          command:
+            make build
+      - run:
+          name: Run Tests
+          command:
+            make test
 
-  # tests:
-  #   machine:
-  #     image: circleci/classic:201711-01
-  #   working_directory: ~/api-business-calendar
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/api-business-calendar
-  #     - run:
-  #         name: Build Images
-  #         command: make run-local
-  #     - run:
-  #         name: Running Tests
-  #         command: make test
 
 workflows:
     build_and_deploy:
       jobs:
-        - linter:
+        # - linter:
+        #     filters:
+        #         branches:
+        #           only: /.*/
+        #         tags:
+        #           only: /.*/
+        - tests:
             filters:
-                branches:
-                  only: /.*/
-                tags:
-                  only: /.*/
-      # jobs:
-      #   - build:
-      #       filters:
-      #         branches:
-      #           only: /.*/
-      #         tags:
-      #           only: /.*/
-
-      #   - tests:
-      #       filters:
-      #         branches:
-      #           only: /.*/
-      #         tags:
-      #           only: /.*/
+              branches:
+                only: /.*/
+              tags:
+                only: /.*/

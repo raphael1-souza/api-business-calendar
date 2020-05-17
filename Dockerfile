@@ -4,6 +4,8 @@ WORKDIR /usr/app
 
 COPY package.json .
 
-RUN yarn --quiet
+RUN yarn install
 
 COPY ./src/ .
+
+EXPOSE 3333
