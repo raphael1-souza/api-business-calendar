@@ -1,19 +1,16 @@
 version: 2.1
-# orbs:
-#   node: circleci/node@1.1.6
+orbs:
+  node: circleci/node@1.1.6
 jobs:
-  machine: true
   build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
-      - setup_remote_docker
       - node/with-cache:
           steps:
-            - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            - run: make run-local
-            - run: make test
+            - run: npm install
+            - run: npm test
 workflows:
     build-and-test:
       jobs:
