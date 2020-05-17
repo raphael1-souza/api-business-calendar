@@ -1,11 +1,11 @@
 run-local:
-	@docker-compose up
+	@docker-compose up -d util_day-app
 
 down:
 	@docker-compose down
 
 build:
-	@docker-compose up --build
+	@docker-compose up --build util_day-app
 
 clean:
 	@docker-compose stop && docker-compose rm -f
@@ -17,9 +17,5 @@ add-country:
 	./scripts/create-country-template.sh $(COUNTRY)
 
 test:
-	yarn test
-
-run:
-	@docker-compose up -d
-
-run-test: run test down
+	@docker-compose up -d util_day-app
+	@docker-compose up --abort-on-container-exit test
