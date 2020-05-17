@@ -1,7 +1,20 @@
 import { add } from 'date-fns';
 import { getEaster } from '../helpers';
 import Country from './Country';
-import { JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC } from '../constants';
+import {
+  JAN,
+  FEB,
+  MAR,
+  APR,
+  MAY,
+  JUN,
+  JUL,
+  AUG,
+  SEP,
+  OCT,
+  NOV,
+  DEC,
+} from '../constants';
 
 class Brazil extends Country {
   constructor(year) {
@@ -66,8 +79,6 @@ class Brazil extends Country {
     super.addHoliday(quaresma, 'Quarta-feira de cinzas (Início da Quaresma)');
 
     super.addHoliday(add(quaresma, { days: -1 }), 'Carnaval');
-
-    console.log(this.holidays);
   }
 
   getStates() {
