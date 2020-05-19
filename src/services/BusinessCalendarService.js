@@ -1,13 +1,13 @@
 import { formatISO, parseISO, isValid } from 'date-fns';
-import UnitedStates from '../countries/UnitedStates';
+import { countryExists } from '../countries';
 
 class BusinessCalendarService {
-  isBusinessDay(dateObject) {
+  isBusinessDay(dateObject, Country) {
     const date = formatISO(dateObject, { representation: 'date' });
     const typeDate = new Date(date);
     const year = typeDate.getFullYear();
-    const usa = new UnitedStates(year);
-    const { holidays } = usa.getHolidays();
+    const country = new Country(year);
+    const { holidays } = country.getHolidays();
     let holiday = false;
     let description = 'Business day';
     if (typeDate.getDay() === 0 || typeDate.getDay() === 6) {
@@ -33,14 +33,21 @@ class BusinessCalendarService {
     };
   }
 
-  listDays(dateList) {
+  listDays(dateList, country) {
+    const countryObject = countryExists(country);
+    if (!countryObject) {
+      return {
+        error: 'Country not Found',
+      };
+    }
+
     let date;
 
     const datesResult = dateList.map((dateString) => {
       date = parseISO(dateString);
       const result = isValid(date);
       if (result !== false) {
-        return this.isBusinessDay(date);
+        return this.isBusinessDay(date, countryObject);
       }
       return {
         error: `invalid date: ${dateString}`,
