@@ -1,0 +1,25 @@
+import { add } from 'date-fns';
+import Country from '../../../models/Country';
+import months from '../../constants';
+
+class TOKEN extends Country {
+  constructor(year) {
+    super('Country Name', 'Oficial Country Name');
+    this.STATES = [];
+    this.populate(year);
+  }
+
+  populate(year) {
+    //Example
+    super.addHoliday(new Date(year, months.JAN, 1), 'New Year');
+  }
+
+  getStates() {
+    return {
+      first: this.STATES[0],
+      size: this.STATES.length,
+    };
+  }
+}
+
+export default TOKEN;
