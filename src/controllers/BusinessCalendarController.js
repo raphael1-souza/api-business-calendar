@@ -25,9 +25,8 @@ class BusinessCalendarController {
 
     if (date) {
       date = parseISO(date);
-      // o Lint Estava falhando aqui, precisei por esta linha, verificar se faz sentido
       const isNumber = (value) => !Number.isNaN(Number(value));
-      if (!isNumber(date)) {
+      if (isNumber(date)) {
         return res.json(BusinessCalendarService.isBusinessDay(date, country));
       }
     }
