@@ -10,6 +10,6 @@ routes.get(
   BusinessCalendar.isBusinessDay
 );
 
-routes.get('/listdays/:dates/:country?', BusinessCalendar.listDays);
+routes.get('/listdays', BusinessCalendar.listDays);
 
 export default routes;

@@ -1,24 +1,12 @@
 import { add } from 'date-fns';
-import { getEaster } from '../helpers';
-import Country from './Country';
-import {
-  JAN,
-  FEB,
-  MAR,
-  APR,
-  MAY,
-  JUN,
-  JUL,
-  AUG,
-  SEP,
-  OCT,
-  NOV,
-  DEC,
-} from '../constants';
+import Country from '../../../models/Country';
+import months from '../../constants';
 
-class Brazil extends Country {
+import getEaster from './helpers';
+
+class BRA extends Country {
   constructor(year) {
-    super();
+    super('Brasil', 'República Federativa do Brasil');
     this.STATES = [
       'AC',
       'AL',
@@ -52,21 +40,24 @@ class Brazil extends Country {
   }
 
   populate(year) {
-    super.addHoliday(new Date(year, JAN, 1), 'Ano novo');
+    super.addHoliday(new Date(year, months.JAN, 1), 'Ano novo');
 
-    super.addHoliday(new Date(year, APR, 21), 'Tiradentes');
+    super.addHoliday(new Date(year, months.APR, 21), 'Tiradentes');
 
-    super.addHoliday(new Date(year, MAY, 1), 'Dia Mundial do Trabalho');
+    super.addHoliday(new Date(year, months.MAY, 1), 'Dia Mundial do Trabalho');
 
-    super.addHoliday(new Date(year, SEP, 7), 'Independência do Brasil');
+    super.addHoliday(new Date(year, months.SEP, 7), 'Independência do Brasil');
 
-    super.addHoliday(new Date(year, OCT, 12), 'Nossa Senhora Aparecida');
+    super.addHoliday(new Date(year, months.OCT, 12), 'Nossa Senhora Aparecida');
 
-    super.addHoliday(new Date(year, NOV, 2), 'Finados');
+    super.addHoliday(new Date(year, months.NOV, 2), 'Finados');
 
-    super.addHoliday(new Date(year, NOV, 15), 'Proclamação da República');
+    super.addHoliday(
+      new Date(year, months.NOV, 15),
+      'Proclamação da República'
+    );
 
-    super.addHoliday(new Date(year, DEC, 25), 'Natal');
+    super.addHoliday(new Date(year, months.DEC, 25), 'Natal');
 
     const easter = getEaster(year);
     super.addHoliday(add(easter, { days: -2 }), 'Sexta feira santa');
@@ -89,4 +80,4 @@ class Brazil extends Country {
   }
 }
 
-export default Brazil;
+export default BRA;

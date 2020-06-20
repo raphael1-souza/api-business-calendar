@@ -1,24 +1,12 @@
 import { add } from 'date-fns';
-import { nthWeekday } from '../helpers';
-import Country from './Country';
-import {
-  JAN,
-  FEB,
-  MAR,
-  APR,
-  MAY,
-  JUN,
-  JUL,
-  AUG,
-  SEP,
-  OCT,
-  NOV,
-  DEC,
-} from '../constants';
+import Country from '../../../models/Country';
+import months from '../../constants';
 
-class UnitedStates extends Country {
+import nthWeekday from './helpers';
+
+class USA extends Country {
   constructor(year) {
-    super();
+    super('Estados Unidos', 'Estados Unidos da América');
     this.STATES = [
       'AL',
       'AK',
@@ -90,7 +78,7 @@ class UnitedStates extends Country {
 
     // New Year's Day
     name = "New Year's Day";
-    date = new Date(year, JAN, 1);
+    date = new Date(year, months.JAN, 1);
     super.addHoliday(date, name);
 
     if (date.getDay() === 0) {
@@ -98,7 +86,7 @@ class UnitedStates extends Country {
       super.addHoliday(date, `${name} (Observed)`);
     }
 
-    date = new Date(year, DEC, 31);
+    date = new Date(year, months.DEC, 31);
     if (date.getDay() === 5) {
       super.addHoliday(date, `${name} (Observed)`);
     }
@@ -106,23 +94,23 @@ class UnitedStates extends Country {
     // Martin Luther King Day
     name = 'Martin Luther King Day';
     if (year >= 1986) {
-      date = nthWeekday(1, 3, new Date(year, JAN, 1));
+      date = nthWeekday(1, 3, new Date(year, months.JAN, 1));
       super.addHoliday(date, name);
     }
 
     //  Washington's Birthday
     name = "Washington's Birthday";
-    date = nthWeekday(1, 3, new Date(year, FEB, 1));
+    date = nthWeekday(1, 3, new Date(year, months.FEB, 1));
     super.addHoliday(date, name);
 
     // Memorial Day
     name = 'Memorial Day';
     if (year > 1970) {
-      date = new Date(year, MAY, 31);
+      date = new Date(year, months.MAY, 31);
       if (date.getDay() === 1) {
         super.addHoliday(date, name);
       } else {
-        date = nthWeekday(1, 0, new Date(year, MAY, 31));
+        date = nthWeekday(1, 0, new Date(year, months.MAY, 31));
         super.addHoliday(date, name);
       }
     } else if (year >= 1888) {
@@ -132,7 +120,7 @@ class UnitedStates extends Country {
     // Independence Day
     if (year > 1870) {
       name = 'Independence Day';
-      date = new Date(year, JUL, 4);
+      date = new Date(year, months.JUL, 4);
       super.addHoliday(date, name);
 
       if (date.getDay() === 0) {
@@ -147,7 +135,7 @@ class UnitedStates extends Country {
     //  Labor Day
     if (year >= 1894) {
       name = 'Labor Day';
-      date = nthWeekday(1, 1, new Date(year, SEP, 1));
+      date = nthWeekday(1, 1, new Date(year, months.SEP, 1));
       super.addHoliday(date, name);
     }
 
@@ -155,10 +143,10 @@ class UnitedStates extends Country {
     name = 'Columbus Day';
 
     if (year >= 1970) {
-      date = nthWeekday(1, 2, new Date(year, OCT, 1));
+      date = nthWeekday(1, 2, new Date(year, months.OCT, 1));
       super.addHoliday(date, name);
     } else if (year >= 1937) {
-      super.addHoliday(new Date(year, OCT, 12), name);
+      super.addHoliday(new Date(year, months.OCT, 12), name);
     }
 
     //  Veterans Day
@@ -166,10 +154,10 @@ class UnitedStates extends Country {
     else name = 'Armistice Day';
 
     if (year < 1978 > 1970) {
-      date = nthWeekday(1, 4, new Date(year, OCT, 1));
+      date = nthWeekday(1, 4, new Date(year, months.OCT, 1));
       super.addHoliday(date, name);
     } else if (year >= 1938) {
-      date = new Date(year, NOV, 11);
+      date = new Date(year, months.NOV, 11);
       super.addHoliday(date, name);
 
       if (date.getDay() === 0) {
@@ -184,14 +172,14 @@ class UnitedStates extends Country {
     //  Thanksgiving
     if (year > 1870) {
       name = 'Thanksgiving';
-      date = nthWeekday(4, 4, new Date(year, NOV, 1));
+      date = nthWeekday(4, 4, new Date(year, months.NOV, 1));
       super.addHoliday(date, name);
     }
 
     // Christmas Day
     if (year > 1870) {
       name = 'Christmas Day';
-      date = new Date(year, DEC, 25);
+      date = new Date(year, months.DEC, 25);
       super.addHoliday(date, name);
 
       if (date.getDay() === 0) {
@@ -212,4 +200,4 @@ class UnitedStates extends Country {
   }
 }
 
-export default UnitedStates;
+export default USA;

@@ -1,8 +1,18 @@
 import { formatISO } from 'date-fns';
 
 class Country {
-  constructor() {
+  constructor(name, oficialName) {
+    this.name = name;
+    this.oficialName = oficialName;
     this.holidays = new Map();
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getOficialName() {
+    return this.oficialName;
   }
 
   addHoliday(date, description) {

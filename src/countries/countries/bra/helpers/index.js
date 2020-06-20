@@ -23,10 +23,4 @@ function getEaster(year) {
   return new Date(`${year}-${month}-${day}`);
 }
 
-function nthWeekday(dayOfWeek, n, date) {
-  date.setDate(date.getDate() + ((((7 - date.getDay()) % 7) + dayOfWeek) % 7));
-  date.setDate(date.getDate() + 7 * (n - 1));
-  return date;
-}
-
-export { getEaster, nthWeekday };
+export default getEaster;
