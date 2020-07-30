@@ -7,3 +7,5 @@ COPY package.json .
 RUN yarn --quiet
 
 COPY ./src/ .
+
+EXPOSE 3333
